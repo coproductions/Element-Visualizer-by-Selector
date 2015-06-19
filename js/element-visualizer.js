@@ -18,16 +18,18 @@ javascript:(function(){
     var colorCache = [];
 
     function resetColors(){
-      var lastSelector = colorCache.shift();
-      for (var i = 0; i < colorCache.length; i++) {
-        document.querySelectorAll(lastSelector)[i].style.backgroundColor = colorCache[i];
-      };
+      if(colorCache.length>0){
+        var lastSelector = colorCache.shift();
+        for (var i = 0; i < colorCache.length; i++) {
+          document.querySelectorAll(lastSelector)[i].style.backgroundColor = colorCache[i];
+        };
+        colorCache = [];
+      }
     };
 
     function render(){
       resetColors();
       colorCache = [inputField.value]
-      console.log('ienein',colorCache)
       for (var i = 0; i < document.querySelectorAll(inputField.value).length; i++) {
         colorCache.push(document.querySelectorAll(inputField.value)[i].style.backgroundColor);
         document.querySelectorAll(inputField.value)[i].style.backgroundColor = 'yellow';
